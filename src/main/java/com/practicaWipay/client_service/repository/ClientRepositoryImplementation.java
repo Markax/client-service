@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -38,11 +37,6 @@ public class ClientRepositoryImplementation implements ClientRepository{
     @Override
     public List<Client> findAll() {
         return dynamoDBMapper.scan(Client.class, new DynamoDBScanExpression());
-    }
-
-    @Override
-    public Optional<Client> findByEmail(String email) {
-        return Optional.ofNullable(dynamoDBMapper.load(Client.class, email));
     }
 
 }
