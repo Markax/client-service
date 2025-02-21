@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/clients")
 @RequiredArgsConstructor
@@ -22,6 +24,12 @@ public class ClientController {
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable String id, @RequestParam(required = false) boolean simpleOutput) {
         return clientService.findById(id, simpleOutput).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<Client>> findByName(@PathVariable String name) {
+        List<Client> clients = clientService.findByName(name);
+        return ResponseEntity.ok(clients);
     }
 
 }
