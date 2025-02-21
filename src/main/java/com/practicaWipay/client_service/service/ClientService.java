@@ -10,5 +10,5 @@ public interface ClientService {
     ClientDTO createClient(Client client);
     Optional<?> findById(String id, boolean simpleOutput);
     List<Client> findByName(String name);
-    Optional<ClientDTO> findByEmail(String email);
+    Optional<?> findByEmail(String email);
 }

@@ -7,7 +7,6 @@ import com.practicaWipay.client_service.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -45,7 +44,9 @@ public class ClientServiceImplementation implements ClientService {
     }
 
     @Override
-    public Optional<ClientDTO> findByEmail(String email){
-        return clientRepository.findByEmail(email);
+    public Optional<?> findByEmail(String email){
+        List<Client> foundClient = clientRepository.findByValue(email, "email");
+
+        return foundClient.isEmpty() ? Optional.empty() : Optional.ofNullable(foundClient.get(0));
     }
 }
