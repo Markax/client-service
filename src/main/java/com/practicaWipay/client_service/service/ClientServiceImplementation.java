@@ -7,7 +7,7 @@ import com.practicaWipay.client_service.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,10 +38,10 @@ public class ClientServiceImplementation implements ClientService {
     }
 
     @Override
-    public List<ClientDTO> findAll(String name){
-        List<Client> clients = clientRepository.findAll();
-        return clients.stream().map(clientMapper::toDTO).collect(Collectors.toList());
-
+    public List<Client> findByName(String name){
+        return clientRepository.findAll().stream().filter(client -> {
+            return client.getName() != null && client.getName().equalsIgnoreCase(name);
+        }).collect(Collectors.toList());
     }
 
     @Override
