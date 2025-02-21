@@ -1,13 +1,13 @@
 package com.practicaWipay.client_service.repository;
 
-import org.springframework.stereotype.Repository;
+import com.practicaWipay.client_service.model.Client;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ClientRepository<Client, String> {
+public interface ClientRepository{
     void save(Client client);
-    Optional<Client> findById(String id);
+    List<Client> findByValue(String id, String field);
     List<Client> findAll();
     Optional<Client> findByEmail(String email);
 }

@@ -7,6 +7,7 @@ import com.practicaWipay.client_service.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,16 +25,10 @@ public class ClientServiceImplementation implements ClientService {
     }
 
     @Override
-    public Optional<ClientDTO> findById(String id, boolean simpleOutput){
-        return clientRepository.findById(id)
-                .map(client -> {
-                    if (simpleOutput) {
-                        ClientDTO clientDTO = new ClientDTO();
-                        clientDTO.setId(((Client) client).getId());
-                        return clientDTO;
-                    }
-                    return clientMapper.toDTO((Client) client);
-                });
+    public Optional<Client> findById(String id, boolean simpleOutput){
+        List<Client> foundClient =  clientRepository.findByValue(id, "PK");
+
+        return foundClient.isEmpty() ? Optional.empty() : Optional.ofNullable(foundClient.get(0));
     }
 
     @Override
