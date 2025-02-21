@@ -20,7 +20,7 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Client> findById(@PathVariable String id, @RequestParam(required = false) boolean simpleOutput) {
+    public ResponseEntity<?> findById(@PathVariable String id, @RequestParam(required = false) boolean simpleOutput) {
         return clientService.findById(id, simpleOutput).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 

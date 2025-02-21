@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface ClientService {
     ClientDTO createClient(Client client);
-    Optional<Client> findById(String id, boolean simpleOutput);
+    Optional<?> findById(String id, boolean simpleOutput);
     List<ClientDTO> findAll(String name);
     Optional<ClientDTO> findByEmail(String email);
 }

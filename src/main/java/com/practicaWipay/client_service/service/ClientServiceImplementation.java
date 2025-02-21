@@ -25,10 +25,16 @@ public class ClientServiceImplementation implements ClientService {
     }
 
     @Override
-    public Optional<Client> findById(String id, boolean simpleOutput){
+    public Optional<?> findById(String id, boolean simpleOutput){
         List<Client> foundClient =  clientRepository.findByValue(id, "PK");
 
-        return foundClient.isEmpty() ? Optional.empty() : Optional.ofNullable(foundClient.get(0));
+        Optional<?> response = foundClient.isEmpty() ? Optional.empty() : Optional.ofNullable(foundClient.get(0));
+
+        if(simpleOutput && response.isPresent())
+            return Optional.of(id);
+        else
+            return response;
+
     }
 
     @Override
