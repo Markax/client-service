@@ -1,5 +1,6 @@
 package com.practicaWipay.client_service.service;
 
+import com.practicaWipay.client_service.dto.MerchantDTO;
 import com.practicaWipay.client_service.model.Client;
 import com.practicaWipay.client_service.dto.ClientDTO;
 
@@ -11,4 +12,5 @@ public interface ClientService {
     Optional<?> findById(String id, boolean simpleOutput);
     List<Client> findByName(String name);
     Optional<?> findByEmail(String email);
+    MerchantDTO getMerchantById(String id);
 }

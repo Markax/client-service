@@ -1,5 +1,7 @@
 package com.practicaWipay.client_service.controller;
 
+import com.practicaWipay.client_service.client.MerchantClient;
+import com.practicaWipay.client_service.dto.MerchantDTO;
 import com.practicaWipay.client_service.model.Client;
 import com.practicaWipay.client_service.service.ClientService;
 import lombok.RequiredArgsConstructor;
@@ -43,4 +45,9 @@ public class ClientController {
         return clients.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/getmerchant/{id}")
+    public ResponseEntity<MerchantDTO> getMerchantById(@PathVariable("id") String id) {
+        MerchantDTO merchant = clientService.getMerchantById(id);
+        return merchant != null ? ResponseEntity.ok(merchant) : ResponseEntity.notFound().build();
+    }
 }

@@ -1,5 +1,7 @@
 package com.practicaWipay.client_service.service;
 
+import com.practicaWipay.client_service.client.MerchantClient;
+import com.practicaWipay.client_service.dto.MerchantDTO;
 import com.practicaWipay.client_service.mappers.ClientMapper;
 import com.practicaWipay.client_service.model.Client;
 import com.practicaWipay.client_service.dto.ClientDTO;
@@ -17,6 +19,7 @@ public class ClientServiceImplementation implements ClientService {
 
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
+    private final MerchantClient merchantClient;
 
     public ClientDTO createClient(Client client) {
         clientRepository.save(client);
@@ -48,5 +51,9 @@ public class ClientServiceImplementation implements ClientService {
         List<Client> foundClient = clientRepository.findByValue(email, "email");
 
         return foundClient.isEmpty() ? Optional.empty() : Optional.ofNullable(foundClient.get(0));
+    }
+
+    public MerchantDTO getMerchantById(String id) {
+        return merchantClient.getMerchantById(id);
     }
 }
